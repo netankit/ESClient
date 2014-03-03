@@ -32,17 +32,34 @@ public class ESClientIndex {
 		        .execute()
 		        .actionGet();
 		
-		//Indexing without providing the ID
-		String json = "{" +
-		        "\"user\":\"kimchy\"," +
-		        "\"postDate\":\"2013-01-30\"," +
-		        "\"message\":\"trying out Elasticsearch\"," +
-		    "}";
+//		Indexing without providing the ID
+//		String json = "{" +
+//		        "\"user\":\"kimchy\"," +
+//		        "\"postDate\":\"2013-01-30\"," +
+//		        "\"message\":\"trying out Elasticsearch\"," +
+//		    "}";
+//
+//		IndexResponse response_noid = client.prepareIndex("twitter", "tweet")
+//		        .setSource(json)
+//		        .execute()
+//		        .actionGet();
+		
+		// Index name
+		String _index = response.getIndex();
+		System.out.println(_index);
+		// Type name
+		String _type = response.getType();
+		System.out.println(_type);
 
-		IndexResponse response_noid = client.prepareIndex("twitter", "tweet")
-		        .setSource(json)
-		        .execute()
-		        .actionGet();
+		// Document ID (generated or not)
+		String _id = response.getId();
+		System.out.println(_id);
+
+		// Version (if it's the first time you index this document, you will get: 1)
+		long _version = response.getVersion();
+		System.out.println(_version);
+		
+		
 		
 
 		// on shutdown
